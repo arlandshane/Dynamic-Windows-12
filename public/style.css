@@ -1,103 +1,174 @@
 body {
-    background-image: url("wallpaper.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh;
+    /* user-select: none; */
+    overflow: hidden;
+    cursor: default;
 }
 
+::selection {
+    background-color: paleturquoise;
+    color: black;
+}
+
+:not(input) {
+    caret-color: transparent;
+}
+
+:is(.findFile) {
+    caret-color: turquoise;
+    outline: none;
+    color: rgb(193, 220, 218);
+}
+
+/*paragraph element does not have a margin*/
 p {
     margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-display: swap;
 }
 
-#signIn {
-    position: absolute;
-    transform: translate3d(1rem, 1rem, 0);
-    display: inline-flex;
-    height: 2rem;
+/*normal sized text with .8 opacity*/
+em {
+    font-style: normal;
+    opacity: .8;
 }
 
-.text {
+ul {
+    list-style: none;
+}
+
+/*every item of an unordered list has a padding of .5rem*/
+ul li {
+    padding: .5rem;
     opacity: 1;
+}
+
+.arlandshane {
+    margin: auto .5rem;
+    font-size: 1rem;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: lighter;
+    font-display: swap;
+}
+
+/*background wallpaper*/
+.wallpaper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*shows a pointer when the mouse hovers over a div containing this classed*/
+.click {
+    cursor: pointer;
+}
+
+/*text that are small and white, and in a straight line*/
+.text {
+    opacity: .9;
     color: white;
     font-size: small;
     white-space: nowrap;
 }
 
+/*divs that have a blurred black background and a border radius of .5rem*/
 .contain {
+    z-index: 1;
     background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(1px);
     border-radius: 0.5rem;
 }
 
+#tooltip-content {
+    display: none;
+    white-space: nowrap;
+    height: fit-content;
+    color: inherit;
+    padding: 0 .3rem;
+    border: .1px solid;
+    border-radius: .3rem;
+    font-size: .8rem;
+    margin: auto 0;
+    transition-duration: 300ms;
+}
+
+#tooltip-trigger:hover+#tooltip-content {
+    display: inline-block;
+}
+
+/*time displayed at the center of the screen*/
+.time-piece {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    font-size: 5rem;
+    font-display: swap;
+    color: black;
+    opacity: .6;
+}
+
 .weather {
-    text-align: center;
     display: flex;
     justify-content: space-between;
 }
 
 .weatherIcon {
+    transition: all .5s cubic-bezier(0, 0, 0, 2);
     position: relative;
-    top: .7rem;
-    padding: .5rem;
+    top: 1rem;
+    margin: 0 .5rem;
     transform: scale(1.2);
+    color: white;
 }
 
 .music {
     width: fit-content;
     display: flex;
     margin: 0 1vw;
-    padding: 2vh 0;
+    padding: 1vh 0;
+}
+
+.musicControls {
+    margin-top: 1vh;
+    display: flex;
+    margin: auto;
+    height: 100%;
+}
+
+#previous-song,
+#play-song,
+#pause-song,
+#next-song {
+    transition-duration: 300ms;
+}
+
+#previous-song:hover,
+#play-song:hover,
+#pause-song:hover,
+#next-song:hover {
+    background: rgba(0, 0, 0, .3);
+    border-radius: .3rem;
+}
+
+.albumArt {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: auto .5rem;
+    border-radius: 100%;
 }
 
 .side {
     display: flex;
 }
 
-.day {
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-left: 1vw;
-}
-
-#time {
-    font-size: small;
-    color: white;
-    padding: 0 .7rem;
-}
-
-#date {
-    font-size: small;
-    color: white;
-    padding: 0 .7rem;
-}
-
 .dateTime {
-    display: flex;
-    flex-direction: column;
-}
-
-.notification {
-    font-size: small;
-    background-color: rgb(40, 40, 40);
+    display: block;
     position: relative;
-    padding: 0.1rem 0.55rem 0.2rem;
-    border: solid 1px white;
-    border-radius: 30%;
-    color: white;
-    position: relative;
-    transform: translate3d(0, 0, 0);
-}
-
-.click {
-    cursor: pointer;
+    transform: translate3d(0, 20vh, 0);
 }
 
 .taskbar {
     display: flex;
-    margin-left: 1vw;
-    margin-right: 1vw;
+    margin: 0 1vw;
     justify-content: space-between;
     position: absolute;
     bottom: 2vh;
@@ -105,63 +176,424 @@ p {
     height: 3.5rem;
 }
 
-.icons {
-    width: 30rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.icon {
-    width: 4vh;
-}
-
-.hr1 {
-    border-radius: 1rem;
-    border-left: solid whitesmoke;
-    width: .1vw;
-    height: 3.5vh;
-}
-
+/*wifi, volume, battery and bluetooth icons*/
 .shortcut {
-    transition-duration: 300ms;
+    transition: all .5s cubic-bezier(0, 0, 0, 2);
     width: fit-content;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    margin-left: 1vw;
 }
 
+/*volume slider in the expanded volume div*/
 .progressBar {
-    width: 7rem;
+    transition: all .5s cubic-bezier(0, 0, 0, 2);
+    width: 8rem;
     height: .3rem;
-    background-color: white;
+    background-color: lavender;
+    opacity: .9;
     margin-right: .7rem;
     border-radius: 1rem;
 }
 
+/*expanding the wifi div*/
 .wifiBar {
+    transition: all .5s cubic-bezier(0, 0, 0, 2);
     padding-right: .7rem;
 }
 
+/*expanding the battery div*/
 .batteryBar {
+    transition: all .5s cubic-bezier(0, 0, 0, 2);
     padding-right: .7rem;
 }
 
+/*expanding the bluetooth div*/
 .blueBar {
-    padding-right: .7rem;
+    transition: all .5s cubic-bezier(0, 0, 0, 2);
+    padding-right: .5rem;
 }
 
-@media only screen and (max-width: 1100px) {
-    .icons {
-        position: absolute;
-        bottom: 10vh;
-    }
+/*connect and disconnect in the expanded bluetooth div*/
+.dis-connect {
+    align-items: center;
+    font-size: smaller;
+    background-color: lavender;
+    border-radius: .2rem;
+    width: fit-content;
+    height: 4vh;
+    margin-right: .3rem;
+    padding: 0 .3rem;
+    display: none;
+    user-select: none;
 }
 
-.start {
+.container-fluid {
     position: absolute;
-    transform: translate3d(30vw, 45vh, 0);
+    height: fit-content;
+    bottom: 2vh;
+}
+
+/*all the icons of the taskbar*/
+.icons {
+    width: fit-content;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-top: 1vh;
+}
+
+/*each icon of the taskbar*/
+.icon {
+    width: 2rem;
+    height: 2rem;
+    margin: 0 1vw;
+    filter: drop-shadow(0 0 .1rem rgb(125, 125, 125));
+}
+
+/*icons inside the start menu*/
+.icon-sm {
+    width: 2rem;
+    height: 2rem;
+    filter: drop-shadow(0 0 .1rem rgb(125, 125, 125));
+}
+
+/* window-header */
+.window-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.minimize:hover,
+.maximize:hover,
+.close:hover {
+    border-radius: .5rem;
+    background-color: cornsilk;
+}
+
+#handle {
+    cursor: move;
+}
+
+.window-action-icons>img {
+    width: 1.8rem;
+    height: 1.8rem;
+    padding: .3rem;
+}
+
+/* start, file explorer, browser, and settings windows */
+.panel {
+    --panel-width: 50vw;
+
+    background: rgba(0, 0, 0, .5);
+    backdrop-filter: blur(2px);
+    display: none;
+    height: fit-content;
+    width: var(--panel-width);
+}
+
+/* start and user */
+.start-and-user {
+    transform: translate3d(0, -.5rem, 0);
+}
+
+/*start expanded*/
+.start {
+    margin: auto;
+    padding: 1rem;
+    border-radius: .7rem .7rem 0 0;
+}
+
+/*user bar under the start menu showing the name of the user and other options*/
+.user {
+    background: rgba(0, 0, 0, .3);
+    backdrop-filter: blur(2px);
+    margin: auto;
+    width: 50vw;
+    height: 2.5rem;
+    padding: 0 1rem;
+    border-radius: 0 0 1rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    display: none;
+}
+
+/*file explorer expanded*/
+.file-explorer {
+    position: relative;
+    left: 5vw;
+    padding: .5rem .5rem 1rem .5rem;
+    border-radius: .7rem;
+}
+
+/* browser expanded */
+.browser-window {
+    position: relative;
+    left: 5vw;
+    padding: .5rem;
+    border-radius: .7rem;
+}
+
+/* settings window expanded */
+.settings {
+    position: relative;
+    left: 5vw;
+    padding: 1rem;
+    border-radius: .7rem;
+}
+
+.browser-window>input::placeholder {
+    padding: 0 .3rem;
+}
+
+.findFile {
+    width: 10rem;
+    background: rgba(0, 0, 0, .3);
+    border-radius: .4rem;
+}
+
+/*items at the head of the file explorer*/
+.file-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+/*horizontal rule in the taskbar, seperating the windows funtions, windows apps, and installed apps*/
+.hr1 {
+    color: white;
+    background-color: white;
+    width: .1vw;
+    height: 3.5vh;
+}
+
+/*seperating the user bar from the start menu*/
+.hr2 {
+    color: black;
     width: 30rem;
-    height: 20rem;
+    margin: auto;
+    display: none;
+}
+
+/*vertical rule seperating the continue apps*/
+.hr3 {
+    width: 1px;
+    color: white;
+    background-color: white;
+}
+
+/*vertical rule seperating the home icon from the window name*/
+.hr4 {
+    color: white;
+    background-color: white;
+    width: .1vw;
+    height: 1.3rem;
+    margin: auto .3rem;
+}
+
+/* connected devices div */
+.devices {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    width: 50%;
+}
+
+/*connected devices icons*/
+.devices>div>.material-symbols-outlined {
+    color: lavender;
+    opacity: .9;
+    transition-duration: 300ms;
+}
+
+.hard-drive,
+.google-drive {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/*items of list highlight (desktop, downloads, documents, pictures, music, video)*/
+.highlight>span {
+    transition-duration: 300ms;
+    display: inline-flex;
+    margin: .3rem 0;
+    padding: .3rem;
+    border-radius: .5rem;
+}
+
+.highlight>span:hover {
+    background: rgba(0, 0, 0, .3);
+}
+
+/*progress bar has a lavender border and no background*/
+.progress {
+    background: none;
+    border: 1px lavender solid;
+}
+
+/*lavender coloured progress bar with .9 opacity*/
+.progress-bar {
+    background-color: lavender;
+    opacity: .9;
+}
+
+.scrollbar1>p {
+    margin: 1rem;
+    transition-duration: 300ms;
+}
+
+.scrollbar1>.text:hover {
+    transform: scale(1.02);
+}
+
+.scrollbar1::-webkit-scrollbar {
+    width: .1rem;
+}
+
+.scrollbar1::-webkit-scrollbar-track {
+    background: none;
+}
+
+.scrollbar1::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+}
+
+/*cut, copy, and paste icons*/
+.cut-copy-paste {
+    display: inline-flex;
+    background: rgba(0, 0, 0, .3);
+    border-radius: .4rem;
+    padding: .4rem;
+    opacity: .5;
+}
+
+.cut-copy-paste>i {
+    margin: auto .5rem;
+}
+
+/* find a file input box */
+.findFile::placeholder {
+    padding: 0 .3rem;
+    color: white;
+}
+
+/* search icon beside find a file input box */
+.input-group>.material-symbols-outlined {
+    color: white;
+    font-size: large;
+    background: rgba(0, 0, 0, .3);
+    border: none;
+    padding: .2rem .3rem;
+    border-radius: .5rem 0 0 .5rem;
+}
+
+#songList,
+#picList {
+    padding: 1rem 0 1rem 1rem;
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+#music-text-list,
+#pictures-text-list {
+    overflow: auto;
+    height: 17rem;
+    display: none;
+    margin: auto 0;
+    overflow-x: hidden;
+    padding: 0;
+}
+
+#music-text-list>.text,
+#pictures-text-list>.text {
+    margin-right: 1rem;
+}
+
+#pictures-preview>.photo,
+#music-preview>.photo {
+    display: none;
+    max-width: 200px;
+    border-radius: .5rem;
+    margin: .5rem;
+    transition-duration: 300ms;
+    transform: rotate(-2deg);
+}
+
+#music-preview>.photo:hover,
+#pictures-preview>.photo:hover {
+    transform: rotate(0deg) scale(1.1);
+
+}
+
+#windows+.progress,
+#fileExp+.progress,
+#edge+.progress {
+    height: .1rem;
+    width: 1rem;
+    margin: .2rem auto 0;
+    display: none;
+}
+
+#settings-button,
+#darkMode,
+#power-button {
+    background-color: lavender;
+    margin: auto;
+    border-radius: .4rem;
+    cursor: pointer;
+}
+
+.settings-divs {
+    border-radius: .5rem;
+    background: rgba(255, 255, 255, .1);
+    padding: .5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 1000px) {
+    .wallpaper {
+        content: url('Images/phoneWall.webp');
+    }
+
+    .progressBar {
+        width: 7rem;
+    }
+
+    .dis-connect {
+        height: 3vh;
+    }
+
+    .container-fluid {
+        transform: translate3d(0, -7vh, 0);
+    }
+
+    .start,
+    .hr2,
+    .user {
+        width: 90vw;
+    }
+
+    .icon {
+        margin: 0 1.5vw;
+    }
+
+    .panel {
+        width: 90vw;
+    }
 }

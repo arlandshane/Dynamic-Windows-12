@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const https = require('https')
 const ejs = require('ejs')
 const { response } = require('express')
+const port = process.env.Port || 3000
 
 const app = express()
 
@@ -17,7 +18,7 @@ app.get('/', function (req, res) {
     https.get(url, function (response) {
         response.on('data', function (data) {
             const weatherData = JSON.parse(data)
-            const temperature = weatherData.main.temp
+            const temperature = Math.floor(weatherData.main.temp)
             res.render('home', { temperature: temperature })
         })
     })
@@ -27,6 +28,6 @@ app.post('/', function (req, res) {
     res.sendFile(__dirname + '/views/home.ejs')
 })
 
-app.listen('3000', function () {
+app.listen(port, function () {
     console.log('Server is running on port 3000')
 })
